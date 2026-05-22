@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ambush — Issue 1 | Hot Springs Tigers Football</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --royal: #1a3a8f;
+    --red: #c8102e;
+    --gold: #f0c040;
+    --white: #ffffff;
+    --off-white: #f5f4f0;
+    --dark: #0d0d0d;
+    --mid: #1c1c1c;
+    --slate: #2e2e2e;
+    --text: #1a1a1a;
+    --light-text: #444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    font-family: 'Barlow', sans-serif;
+    color: var(--text);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--dark);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .header-stripe {
+    height: 6px;
+    background: linear-gradient(90deg, var(--royal) 0%, var(--royal) 50%, var(--red) 50%, var(--red) 100%);
+  }
+
+  .header-inner {
+    padding: 36px 32px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .header-title span {
+    color: var(--red);
+  }
+
+  .header-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 20px;
+  }
+
+  .header-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--gold);
+    margin: 0 auto 18px;
+  }
+
+  .header-meta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  /* ── COACH'S CORNER ── */
+  .coach-corner {
+    background: var(--royal);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .coach-corner::before {
+    content: '"';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 280px;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    top: -60px;
+    right: -10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .coach-corner .section-label {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .coach-quote {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--white);
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .coach-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.82);
+  }
+
+  .coach-body p + p {
+    margin-top: 14px;
+  }
+
+  .coach-sig {
+    margin-top: 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── CONTENT SECTIONS ── */
+  .section {
+    background: var(--off-white);
+    padding: 36px 32px;
+    border-top: 1px solid #e0ddd8;
+  }
+
+  .section.dark {
+    background: var(--mid);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    letter-spacing: 1px;
+    color: var(--royal);
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+
+  .section.dark .section-title {
+    color: var(--white);
+  }
+
+  .section-title-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .title-accent {
+    width: 4px;
+    height: 34px;
+    background: var(--red);
+    flex-shrink: 0;
+    margin-bottom: 2px;
+  }
+
+  /* ── NUMBERS BLOCK ── */
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 24px;
+  }
+
+  .number-card {
+    background: var(--royal);
+    padding: 22px 16px;
+    text-align: center;
+  }
+
+  .number-card:nth-child(2) {
+    background: var(--red);
+  }
+
+  .number-card:nth-child(3) {
+    background: var(--slate);
+  }
+
+  .num-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .num-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .body-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--light-text);
+  }
+
+  .body-text p + p {
+    margin-top: 14px;
+  }
+
+  .section.dark .body-text {
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── SPEED BOARD ── */
+  .speed-board {
+    background: var(--dark);
+    padding: 36px 32px;
+    border-top: 1px solid #111;
+  }
+
+  .speed-category {
+    margin-bottom: 28px;
+  }
+
+  .speed-category:last-child {
+    margin-bottom: 0;
+  }
+
+  .speed-cat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .speed-row {
+    display: flex;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid #1c1c1c;
+  }
+
+  .speed-rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: #444;
+    width: 24px;
+    flex-shrink: 0;
+  }
+
+  .speed-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    flex: 1;
+    letter-spacing: 0.5px;
+  }
+
+  .speed-year {
+    font-size: 11px;
+    color: #555;
+    margin-left: 6px;
+    font-weight: 400;
+  }
+
+  .speed-time {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .speed-unit {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    color: #555;
+    margin-left: 4px;
+  }
+
+  /* ── OVR EXPLAINER ── */
+  .ovr-block {
+    background: #f0f0ec;
+    border-left: 4px solid var(--royal);
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+
+  .ovr-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--royal);
+    margin-bottom: 8px;
+  }
+
+  .ovr-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #555;
+  }
+
+  /* ── CALENDAR ── */
+  .calendar-list {
+    list-style: none;
+  }
+
+  .cal-item {
+    display: flex;
+    gap: 18px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e5e2dc;
+    align-items: flex-start;
+  }
+
+  .cal-item:last-child {
+    border-bottom: none;
+  }
+
+  .cal-date {
+    background: var(--royal);
+    color: var(--white);
+    text-align: center;
+    padding: 8px 10px;
+    min-width: 52px;
+    flex-shrink: 0;
+  }
+
+  .cal-month {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .cal-day {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .cal-item.red .cal-date {
+    background: var(--red);
+  }
+
+  .cal-item.gold .cal-date {
+    background: var(--dark);
+    border: 1px solid var(--gold);
+  }
+
+  .cal-item.gold .cal-day {
+    color: var(--gold);
+  }
+
+  .cal-info {}
+
+  .cal-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+
+  .cal-detail {
+    font-size: 13px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  /* ── PILLARS ── */
+  .pillars-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 20px;
+  }
+
+  .pillar {
+    background: var(--dark);
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .pillar:nth-child(2) {
+    background: var(--dark);
+  }
+
+  .pillar-word {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .pillar-desc {
+    font-size: 11px;
+    color: #777;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .pillar-word {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .pillar-desc {
+    font-size: 11px;
+    color: #777;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--dark);
+    padding: 32px;
+    text-align: center;
+  }
+
+  .footer-tags {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--royal);
+    margin-bottom: 8px;
+  }
+
+  .footer-tags span {
+    color: var(--red);
+    margin-left: 12px;
+  }
+
+  .footer-school {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .footer-location {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .footer-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #444;
+  }
+
+  .footer-tagline em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .footer-bottom {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #1e1e1e;
+    font-size: 11px;
+    color: #333;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 1px;
+  }
+
+  /* ── REWARD PRESENCE CALLOUT ── */
+  .callout {
+    background: var(--red);
+    padding: 28px 32px;
+  }
+
+  .callout-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .callout-line {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+
+  .callout-line.muted {
+    color: rgba(255,255,255,0.45);
+    font-size: 22px;
+  }
+
+  .callout-bottom {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1px;
+  }
+
+  /* ── HELMET NOTE ── */
+  .helmet-alert {
+    background: var(--gold);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .helmet-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .helmet-text {
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  .helmet-head {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+
+  .helmet-detail {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-eyebrow">Hot Springs Tigers Football</div>
+    <div class="header-title">The<span> Ambush</span></div>
+    <div class="header-sub">Official Program Newsletter</div>
+    <div class="header-divider"></div>
+    <div class="header-meta">Issue 01 &nbsp;·&nbsp; May 2026 &nbsp;·&nbsp; #FFPDF</div>
+  </div>
+</div>
+
+<!-- COACH'S CORNER -->
+<div class="coach-corner">
+  <div class="section-label">From the Head Coach</div>
+  <div class="coach-quote">Two weeks in. The foundation is being built in real time.</div>
+  <div class="coach-body">
+    <p>Tiger families and fans — welcome to the first issue of <em>The Ambush</em>. This newsletter exists for one reason: to keep you connected to what's happening inside this program, even when you can't see it firsthand.</p>
+    <p>We finished the Foundation Teaching Block this week — two weeks of voluntary workouts — and what I've seen has given me a lot to be excited about. Thirty-seven high school players showed up voluntarily. Twelve middle school players. We've averaged over 32 athletes per day across both weeks. Nobody required them to be here. They chose to be here.</p>
+    <p>In this program, that matters. We don't punish absence — we reward presence. Everything is earned: jersey numbers, locker assignments, your seat on the bus. The players who showed up these two weeks are already earning. Every rep counts.</p>
+    <p>We're just getting started. The best is ahead.</p>
+  </div>
+  <div class="coach-sig">— Coach Howell &nbsp;|&nbsp; Hot Springs Tigers Football</div>
+</div>
+
+<!-- NUMBERS -->
+<div class="section">
+  <div class="section-label">The Numbers</div>
+  <div class="numbers-grid">
+    <div class="number-card">
+      <div class="num-big">37</div>
+      <div class="num-label">HS Players</div>
+    </div>
+    <div class="number-card">
+      <div class="num-big">12</div>
+      <div class="num-label">MS Players</div>
+    </div>
+    <div class="number-card">
+      <div class="num-big">32+</div>
+      <div class="num-label">Daily Avg</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>Over two weeks of the Foundation Teaching Block, Tigers came in to train — before summer, before it was mandatory, before anyone was watching but the coaches. That number tells you something about the culture being built here.</p>
+  </div>
+</div>
+
+<!-- REWARD PRESENCE CALLOUT -->
+<div class="callout">
+  <div class="callout-lines">
+    <div class="callout-line muted">We will not punish absence.</div>
+    <div class="callout-line">We will reward presence.</div>
+    <div class="callout-line muted">Everything is earned —</div>
+    <div class="callout-line" style="font-size:21px; color:rgba(255,255,255,0.85);">jersey number &nbsp;·&nbsp; locker &nbsp;·&nbsp; seat on the bus.</div>
+  </div>
+  <div class="callout-bottom">Show up and move up. &nbsp;—&nbsp; Hot Springs Tigers Voluntary Workout Standard</div>
+</div>
+
+<!-- SPEED BOARD -->
+<div class="speed-board">
+  <div class="section-label" style="color:#666; letter-spacing:3px; font-size:10px; font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; margin-bottom:18px;">Week 1 Top Performers</div>
+
+  <div class="speed-category">
+    <div class="speed-cat-label" style="color:#c8a000;">Top Speeds — 5/14</div>
+    <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:10px;">Small Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Zaiden Baker <span class="speed-year">'28</span></div>
+      <div class="speed-time">22.37<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank" style="font-size:13px; color:#666;">T-2</div>
+      <div class="speed-name">Billy Baca <span class="speed-year">'27</span></div>
+      <div class="speed-time">20.15<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row" style="margin-bottom:16px;">
+      <div class="speed-rank" style="font-size:13px; color:#666;">T-2</div>
+      <div class="speed-name">Cole Montoya <span class="speed-year">'27</span></div>
+      <div class="speed-time">20.15<span class="speed-unit">mph</span></div>
+    </div>
+    <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:10px;">Big Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Evan Byers <span class="speed-year">'27</span></div>
+      <div class="speed-time">18.49<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Benjamin Bierner <span class="speed-year">'30</span></div>
+      <div class="speed-time">16.82<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row" style="margin-bottom:16px;">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">3-Way Tie</div>
+      <div class="speed-time">15.01<span class="speed-unit">mph</span></div>
+    </div>
+    <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:10px;">TCMS Tiger Cubs</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Bryce Baca <span class="speed-year">'31</span></div>
+      <div class="speed-time">20.34<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Augustine Villa <span class="speed-year">'31</span></div>
+      <div class="speed-time">19.45<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Kamden Tack <span class="speed-year">'32</span></div>
+      <div class="speed-time">17.21<span class="speed-unit">mph</span></div>
+    </div>
+  </div>
+
+  <div style="height:1px; background:#1e1e1e; margin: 24px 0;"></div>
+  <div class="section-label" style="color:#666; letter-spacing:3px; font-size:10px; font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; margin-bottom:18px;">Week 2 Top Performers</div>
+
+  <div class="speed-category">
+    <div class="speed-cat-label">Small Skills — 40-Yard Dash (5/18)</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Zaiden Baker <span class="speed-year">'28</span></div>
+      <div class="speed-time">4.92<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Aiden Adams <span class="speed-year">'28</span></div>
+      <div class="speed-time">5.03<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Billy Baca <span class="speed-year">'27</span></div>
+      <div class="speed-time">5.04<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+
+  <div class="speed-category">
+    <div class="speed-cat-label">Big Skills — 40-Yard Dash (5/18)</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Christian Archuleta <span class="speed-year">'29</span></div>
+      <div class="speed-time">5.34<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Evan Byers <span class="speed-year">'27</span></div>
+      <div class="speed-time">5.35<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Curtis Trejo <span class="speed-year">'29</span></div>
+      <div class="speed-time">5.49<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+
+  <div class="speed-category">
+    <div class="speed-cat-label">TCMS Tiger Cubs — 40-Yard Dash (5/18)</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Bryce Baca <span class="speed-year">'31</span></div>
+      <div class="speed-time">5.38<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Michael Perez <span class="speed-year">'31</span></div>
+      <div class="speed-time">5.45<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Augustine Villa <span class="speed-year">'31</span></div>
+      <div class="speed-time">5.63<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- OVR APP -->
+<div class="section">
+  <div class="section-title-bar">
+    <div class="title-accent"></div>
+    <div>
+      <div class="section-label">Inside the Program</div>
+      <div class="section-title">Meet the OVR App</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>This year we're using the <strong>Arena OVR App</strong> to track player development — and it's unlike anything most high school programs are doing. OVR measures the complete athlete: not just performance, but behavior, habits, and consistency.</p>
+    <p>The score is split 50/50 — half from measurable data like lifting numbers, 40 times, and GPA, and half from intangibles that coaches track daily: effort, toughness, leadership, and how a player represents the program.</p>
+  </div>
+  <div class="ovr-block">
+    <div class="ovr-title">What This Means for Your Athlete</div>
+    <div class="ovr-text">Every day matters. Every rep in the weight room matters. How you treat your teammates matters. The OVR score is a live reflection of who you're becoming — not just what you can run. The app is currently available on the App Store, with Android / Google Play coming soon.</div>
+  </div>
+</div>
+
+<!-- HELMET ALERT -->
+<div class="helmet-alert">
+  <div class="helmet-icon">🏈</div>
+  <div class="helmet-text">
+    <div class="helmet-head">Don't Miss It</div>
+    <div class="helmet-detail">Riddell Helmet Fitting — Tuesday, May 26 at 3:00 PM &nbsp;|&nbsp; One Day Only</div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div class="section">
+  <div class="section-title-bar">
+    <div class="title-accent" style="background:var(--red)"></div>
+    <div>
+      <div class="section-label">Upcoming</div>
+      <div class="section-title">Key Dates</div>
+    </div>
+  </div>
+  <ul class="calendar-list">
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">May</div>
+        <div class="cal-day">26</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Riddell Helmet Fitting</div>
+        <div class="cal-detail">3:00 PM — One Day Only. Do not miss this.</div>
+      </div>
+    </li>
+    <li class="cal-item red">
+      <div class="cal-date">
+        <div class="cal-month">Jun</div>
+        <div class="cal-day">1</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Summer Workouts Begin — The Climb</div>
+        <div class="cal-detail">Mon / Tue / Wed mornings at 8:00 AM · Runs through July 1</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">1</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Equipment Issue</div>
+        <div class="cal-detail">July 1–3 · By Appointment</div>
+      </div>
+    </li>
+    <li class="cal-item red">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">6</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Summer Camp</div>
+        <div class="cal-detail">July 6–17 · Mon–Fri · 8:00 AM</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">17</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Team Lock-In</div>
+        <div class="cal-detail">After Scrimmage · July 17</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">3</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Fall Practice Begins</div>
+        <div class="cal-detail">The Sharpening continues into the season</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">13</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Scrimmage</div>
+        <div class="cal-detail">August 13</div>
+      </div>
+    </li>
+    <li class="cal-item gold">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">21</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Season Opener — at Tularosa</div>
+        <div class="cal-detail">7:00 PM · Full schedule releasing soon</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- PROGRAM PILLARS -->
+<div class="section dark">
+  <div class="section-title-bar">
+    <div class="title-accent" style="background:var(--gold)"></div>
+    <div>
+      <div class="section-label" style="color:#666;">Who We Are</div>
+      <div class="section-title">#FFPDF</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>Everything we do comes back to five standards. These aren't slogans — they're the daily operating standard for every player in this program.</p>
+  </div>
+  <div class="pillars-row">
+    <div class="pillar">
+      <div class="pillar-word">Fast</div>
+      <div class="pillar-desc">Play with speed</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-word">Fresh</div>
+      <div class="pillar-desc">Fatigue is the enemy</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-word">Physical</div>
+      <div class="pillar-desc">Finish every play</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-word">Disciplined</div>
+      <div class="pillar-desc">No mental errors</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-word">Fun</div>
+      <div class="pillar-desc">Enjoy the game</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-tags">#FeedTheCats<span>#FFPDF</span></div>
+  <div class="footer-school">Hot Springs Tigers Football</div>
+  <div class="footer-location">Truth or Consequences, New Mexico</div>
+  <div class="footer-tagline"><em>The Ambush is coming.</em></div>
+  <div class="footer-bottom">
+    The Ambush · Issue 01 · May 2026 · Published by Hot Springs Tigers Football
+  </div>
+</div>
+
+</body>
+</html>
