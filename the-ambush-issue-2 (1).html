@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ambush — Issue 2 | Hot Springs Tigers Football</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --royal: #1a3a8f;
+    --red: #c8102e;
+    --gold: #f0c040;
+    --white: #ffffff;
+    --off-white: #f5f4f0;
+    --dark: #0d0d0d;
+    --mid: #1c1c1c;
+    --slate: #2e2e2e;
+    --text: #1a1a1a;
+    --light-text: #444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    font-family: 'Barlow', sans-serif;
+    color: var(--text);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .header { background: var(--dark); padding: 0; overflow: hidden; position: relative; }
+  .header-stripe { height: 6px; background: linear-gradient(90deg, var(--royal) 0%, var(--royal) 50%, var(--red) 50%, var(--red) 100%); }
+  .header-inner { padding: 36px 32px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .header-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .header-title { font-family: 'Bebas Neue', sans-serif; font-size: 72px; line-height: 0.9; color: var(--white); letter-spacing: 2px; margin-bottom: 8px; }
+  .header-title span { color: var(--red); }
+  .header-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 20px; }
+  .header-divider { width: 48px; height: 3px; background: var(--gold); margin: 0 auto 18px; }
+  .header-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #666; }
+
+  .coach-corner { background: var(--royal); padding: 36px 32px; position: relative; overflow: hidden; }
+  .coach-corner::before { content: '"'; font-family: 'Bebas Neue', sans-serif; font-size: 280px; color: rgba(255,255,255,0.04); position: absolute; top: -60px; right: -10px; line-height: 1; pointer-events: none; }
+  .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .coach-corner .section-label { color: rgba(255,255,255,0.5); }
+  .coach-quote { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.25; color: var(--white); margin-bottom: 20px; }
+  .coach-body { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.82); }
+  .coach-body p + p { margin-top: 14px; }
+  .coach-sig { margin-top: 24px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+
+  .section { background: var(--off-white); padding: 36px 32px; border-top: 1px solid #e0ddd8; }
+  .section.dark { background: var(--mid); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 1px; color: var(--royal); margin-bottom: 6px; line-height: 1; }
+  .section.dark .section-title { color: var(--white); }
+  .section-title-bar { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 22px; }
+  .title-accent { width: 4px; height: 34px; background: var(--red); flex-shrink: 0; margin-bottom: 2px; }
+
+  .body-text { font-size: 15px; line-height: 1.75; color: var(--light-text); }
+  .body-text p + p { margin-top: 14px; }
+  .section.dark .body-text { color: rgba(255,255,255,0.75); }
+
+  /* ── CALLOUT ── */
+  .callout { background: var(--red); padding: 24px 32px; }
+  .callout-text { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--white); line-height: 1.3; }
+  .callout-detail { margin-top: 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.65); letter-spacing: 1px; }
+
+  /* ── WORKOUT REMINDER ── */
+  .workout-box { background: var(--royal); padding: 28px 32px; }
+  .workout-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--white); letter-spacing: 1px; margin-bottom: 16px; }
+  .workout-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .workout-row:last-child { border-bottom: none; }
+  .workout-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); width: 90px; flex-shrink: 0; }
+  .workout-value { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); }
+
+  /* ── SPEED BOARD ── */
+  .speed-board { background: var(--dark); padding: 36px 32px; border-top: 1px solid #111; }
+  .speed-category { margin-bottom: 28px; }
+  .speed-category:last-child { margin-bottom: 0; }
+  .speed-cat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a; }
+  .speed-row { display: flex; align-items: center; padding: 9px 0; border-bottom: 1px solid #1c1c1c; }
+  .speed-rank { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #444; width: 32px; flex-shrink: 0; }
+  .speed-name { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); flex: 1; letter-spacing: 0.5px; }
+  .speed-year { font-size: 11px; color: #555; margin-left: 6px; font-weight: 400; }
+  .speed-time { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--gold); letter-spacing: 1px; }
+  .speed-unit { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: #555; margin-left: 4px; }
+
+  /* ── TRUCK STICK ── */
+  .truck-row { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #1c1c1c; }
+  .truck-rank { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #444; width: 32px; flex-shrink: 0; }
+  .truck-name { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); flex: 1; }
+  .truck-year { font-size: 11px; color: #555; margin-left: 6px; font-weight: 400; }
+  .truck-score { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--red); letter-spacing: 1px; }
+
+  /* ── WINNERS ── */
+  .winners-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 20px; }
+  .winner-card { background: var(--dark); padding: 18px 16px; text-align: center; }
+  .winner-week { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .winner-name { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--white); letter-spacing: 0.5px; margin-bottom: 4px; }
+  .winner-prize { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: #666; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── LEADERSHIP ── */
+  .leadership-list { margin-top: 16px; }
+  .leader-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #e5e2dc; }
+  .leader-row:last-child { border-bottom: none; }
+  .leader-num { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--royal); width: 28px; flex-shrink: 0; }
+  .leader-name { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; color: var(--text); flex: 1; }
+  .leader-year { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: #999; font-weight: 600; }
+
+  /* ── PHOTO ── */
+  .photo-block { position: relative; overflow: hidden; }
+  .photo-block img { width: 100%; display: block; }
+  .photo-caption { background: var(--dark); padding: 12px 20px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; color: #666; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── CALENDAR ── */
+  .calendar-list { list-style: none; }
+  .cal-item { display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid #e5e2dc; align-items: flex-start; }
+  .cal-item:last-child { border-bottom: none; }
+  .cal-date { background: var(--royal); color: var(--white); text-align: center; padding: 8px 10px; min-width: 52px; flex-shrink: 0; }
+  .cal-month { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; }
+  .cal-day { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; }
+  .cal-item.red .cal-date { background: var(--red); }
+  .cal-item.gold .cal-date { background: var(--dark); border: 1px solid var(--gold); }
+  .cal-item.gold .cal-day { color: var(--gold); }
+  .cal-title { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: 0.3px; }
+  .cal-detail { font-size: 13px; color: #888; margin-top: 2px; }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--dark); padding: 32px; text-align: center; }
+  .footer-tags { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 2px; color: var(--royal); margin-bottom: 8px; }
+  .footer-tags span { color: var(--red); margin-left: 12px; }
+  .footer-school { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--white); letter-spacing: 2px; margin-bottom: 4px; }
+  .footer-location { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 20px; }
+  .footer-tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px; color: #444; }
+  .footer-tagline em { color: var(--gold); font-style: normal; }
+  .footer-bottom { margin-top: 24px; padding-top: 20px; border-top: 1px solid #1e1e1e; font-size: 11px; color: #333; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; }
+
+  .board-divider { height: 1px; background: #1e1e1e; margin: 28px 0; }
+  .board-week-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 18px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-eyebrow">Hot Springs Tigers Football</div>
+    <div class="header-title">The<span> Ambush</span></div>
+    <div class="header-sub">Official Program Newsletter</div>
+    <div class="header-divider"></div>
+    <div class="header-meta">Issue 02 &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; #FFPDF</div>
+  </div>
+</div>
+
+<!-- COACH'S CORNER -->
+<div class="coach-corner">
+  <div class="section-label">From the Head Coach</div>
+  <div class="coach-quote">The Climb is underway. Now it's time to keep climbing.</div>
+  <div class="coach-body">
+    <p>Tiger families — welcome back to The Ambush. We've got a lot to cover from the last two weeks, and even more to look forward to.</p>
+    <p>The final week of school brought some of our best energy and attendance of the entire pre-season. These guys showed up, competed, and got better every day. Now we've transitioned into summer workouts — The Climb — and the opportunity in front of this team is as big as the effort they're willing to put in.</p>
+    <p>Summer workouts are Monday, Tuesday, and Wednesday mornings. Report time is 7:45 AM. We're on the field and moving by 8:00 AM and usually wrapped up by 9:30 AM. That's less than two hours. If you want to be great in August, the work is done in June and July. We want to see every Tiger in that building.</p>
+    <p>The best is still ahead.</p>
+  </div>
+  <div class="coach-sig">— Coach Howell &nbsp;|&nbsp; Hot Springs Tigers Football</div>
+</div>
+
+<!-- WORKOUT REMINDER -->
+<div class="workout-box">
+  <div class="workout-title">☀️ Summer Workouts — The Climb</div>
+  <div class="workout-row">
+    <div class="workout-label">Days</div>
+    <div class="workout-value">Monday · Tuesday · Wednesday</div>
+  </div>
+  <div class="workout-row">
+    <div class="workout-label">Report</div>
+    <div class="workout-value">7:45 AM</div>
+  </div>
+  <div class="workout-row">
+    <div class="workout-label">Start</div>
+    <div class="workout-value">8:00 AM</div>
+  </div>
+  <div class="workout-row">
+    <div class="workout-label">Done</div>
+    <div class="workout-value">~9:30 AM most days</div>
+  </div>
+  <div class="workout-row">
+    <div class="workout-label">Runs</div>
+    <div class="workout-value">Through July 1</div>
+  </div>
+</div>
+
+<!-- BOWLING NIGHT PHOTO -->
+<div class="photo-block">
+  <img src="20260602_192613.JPG" alt="Tigers at Sidekixx Bowling — June 2, 2026" />
+  <div class="photo-caption">Tigers Night Out · Sidekixx · June 2, 2026</div>
+</div>
+
+<!-- BOWLING SECTION -->
+<div class="section">
+  <div class="section-title-bar">
+    <div class="title-accent"></div>
+    <div>
+      <div class="section-label">Team Building</div>
+      <div class="section-title">Coach Terrazas Takes the Team Out</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>On Tuesday night, June 2, Coach Terrazas treated the team to a night out — bowling, pizza, and sodas at Sidekixx. It was a chance to step away from the weight room and just be a team together. Coaches and players, side by side, competing for fun.</p>
+    <p>This is what program culture looks like off the field. Big thanks to Coach Terrazas for making it happen and to Sidekixx for hosting the Hot Springs Tigers.</p>
+  </div>
+</div>
+
+<!-- PERFECT ATTENDANCE WINNERS -->
+<div class="section dark">
+  <div class="section-title-bar">
+    <div class="title-accent" style="background:var(--gold)"></div>
+    <div>
+      <div class="section-label" style="color:#666;">Rewarding Presence</div>
+      <div class="section-title">Perfect Attendance Winners</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>Each week we held a drawing for players with perfect attendance. A&B Drive-In and Johnny B's stepped up as community partners to reward the Tigers who showed up every single day.</p>
+  </div>
+  <div class="winners-grid">
+    <div class="winner-card">
+      <div class="winner-week">Week 1</div>
+      <div class="winner-name">Robert Sanchez</div>
+      <div class="winner-prize">A&B Drive-In</div>
+    </div>
+    <div class="winner-card">
+      <div class="winner-week">Week 2</div>
+      <div class="winner-name">Jaxon Rubio</div>
+      <div class="winner-prize">A&B Drive-In</div>
+    </div>
+    <div class="winner-card">
+      <div class="winner-week">Week 3</div>
+      <div class="winner-name">Levi Robinson</div>
+      <div class="winner-prize">A&B Drive-In</div>
+    </div>
+    <div class="winner-card">
+      <div class="winner-week">Week 4</div>
+      <div class="winner-name">Zaiden Baker</div>
+      <div class="winner-prize">Johnny B's</div>
+    </div>
+  </div>
+  <div class="body-text" style="margin-top:20px;">
+    <p>Thank you to A&B Drive-In and Johnny B's for investing in our players. This is what community support looks like.</p>
+  </div>
+</div>
+
+<!-- SPEED BOARD -->
+<div class="speed-board">
+  <div class="section-label" style="color:#666; letter-spacing:3px; font-size:10px; font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; margin-bottom:18px;">Top Performers — The Climb</div>
+
+  <!-- WEEK 3 SPEEDS -->
+  <div class="board-week-label">Week 3 · Top Speeds — 5/26</div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Small Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Zaiden Baker <span class="speed-year">'28</span></div>
+      <div class="speed-time">22.15<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Chris Baca <span class="speed-year">'28</span></div>
+      <div class="speed-time">20.52<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">T-3</div>
+      <div class="speed-name">2-Way Tie</div>
+      <div class="speed-time">20.34<span class="speed-unit">mph</span></div>
+    </div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Big Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Curtis Trejo <span class="speed-year">'29</span></div>
+      <div class="speed-time">19.12<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Christian Archuleta <span class="speed-year">'29</span></div>
+      <div class="speed-time">18.49<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Jaxon Crawford <span class="speed-year">'29</span></div>
+      <div class="speed-time">18.04<span class="speed-unit">mph</span></div>
+    </div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">TCMS Tiger Cubs</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Bryce Baca <span class="speed-year">'31</span></div>
+      <div class="speed-time">19.45<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">T-2</div>
+      <div class="speed-name">Michael Perez <span class="speed-year">'31</span></div>
+      <div class="speed-time">18.64<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">T-2</div>
+      <div class="speed-name">Augustine Villa <span class="speed-year">'31</span></div>
+      <div class="speed-time">18.64<span class="speed-unit">mph</span></div>
+    </div>
+  </div>
+
+  <div class="board-divider"></div>
+
+  <!-- WEEK 3 40s -->
+  <div class="board-week-label">Week 3 · 40-Yard Dash — 5/28</div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Small Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Zaiden Baker <span class="speed-year">'28</span></div>
+      <div class="speed-time">4.61<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Lucius McMurray <span class="speed-year">'30</span></div>
+      <div class="speed-time">4.81<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Aiden Adams <span class="speed-year">'28</span></div>
+      <div class="speed-time">4.84<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Big Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Curtis Trejo <span class="speed-year">'29</span></div>
+      <div class="speed-time">5.33<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Evan Byers <span class="speed-year">'27</span></div>
+      <div class="speed-time">5.37<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Jaxon Crawford <span class="speed-year">'29</span></div>
+      <div class="speed-time">5.51<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">TCMS Tiger Cubs</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Bryce Baca <span class="speed-year">'31</span></div>
+      <div class="speed-time">5.28<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Michael Perez <span class="speed-year">'31</span></div>
+      <div class="speed-time">5.42<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Kendrick Tack <span class="speed-year">'31</span></div>
+      <div class="speed-time">5.59<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+
+  <div class="board-divider"></div>
+
+  <!-- WEEK 4 SPEEDS -->
+  <div class="board-week-label">Week 4 · Top Speeds — 6/1</div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Small Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Zaiden Baker <span class="speed-year">'28</span></div>
+      <div class="speed-time">21.51<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Billy Baca <span class="speed-year">'27</span></div>
+      <div class="speed-time">20.91<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Chris Baca <span class="speed-year">'28</span></div>
+      <div class="speed-time">20.34<span class="speed-unit">mph</span></div>
+    </div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Big Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Curtis Trejo <span class="speed-year">'29</span></div>
+      <div class="speed-time">17.48<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Adrian Veleta <span class="speed-year">'29</span></div>
+      <div class="speed-time">15.98<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">T-3</div>
+      <div class="speed-name">2-Way Tie</div>
+      <div class="speed-time">15.53<span class="speed-unit">mph</span></div>
+    </div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">TCMS Tiger Cubs</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Michael Perez <span class="speed-year">'31</span></div>
+      <div class="speed-time">18.96<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Bryce Baca <span class="speed-year">'31</span></div>
+      <div class="speed-time">18.49<span class="speed-unit">mph</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Isaiah Fuentes <span class="speed-year">'31</span></div>
+      <div class="speed-time">15.43<span class="speed-unit">mph</span></div>
+    </div>
+  </div>
+
+  <div class="board-divider"></div>
+
+  <!-- WEEK 4 40s -->
+  <div class="board-week-label">Week 4 · 40-Yard Dash — 6/3</div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Small Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Zaiden Baker <span class="speed-year">'28</span></div>
+      <div class="speed-time">4.70<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Billy Baca <span class="speed-year">'27</span></div>
+      <div class="speed-time">5.02<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">T-3</div>
+      <div class="speed-name">Cole Montoya <span class="speed-year">'28</span></div>
+      <div class="speed-time">5.05<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">T-3</div>
+      <div class="speed-name">Lucius McMurray <span class="speed-year">'30</span></div>
+      <div class="speed-time">5.05<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Big Skills</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Curtis Trejo <span class="speed-year">'29</span></div>
+      <div class="speed-time">5.36<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Evan Byers <span class="speed-year">'27</span></div>
+      <div class="speed-time">5.56<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Christian Archuleta <span class="speed-year">'29</span></div>
+      <div class="speed-time">5.61<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">TCMS Tiger Cubs</div>
+    <div class="speed-row">
+      <div class="speed-rank">1</div>
+      <div class="speed-name">Michael Perez <span class="speed-year">'31</span></div>
+      <div class="speed-time">5.44<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">2</div>
+      <div class="speed-name">Bryce Baca <span class="speed-year">'31</span></div>
+      <div class="speed-time">5.48<span class="speed-unit">sec</span></div>
+    </div>
+    <div class="speed-row">
+      <div class="speed-rank">3</div>
+      <div class="speed-name">Cooper Orr <span class="speed-year">'32</span></div>
+      <div class="speed-time">5.83<span class="speed-unit">sec</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUCK STICK -->
+<div class="speed-board" style="border-top: 1px solid #222;">
+  <div class="section-label" style="color:#666; letter-spacing:3px; font-size:10px; font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; margin-bottom:6px;">Arena OVR</div>
+  <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--white); letter-spacing:1px; margin-bottom:6px;">Truck Stick Leaderboard</div>
+  <div style="font-family:'Barlow Condensed',sans-serif; font-size:13px; color:#555; line-height:1.5; margin-bottom:24px;">Combines speed and body weight to measure how much force a player brings when they hit. The higher the score, the harder they're coming.</div>
+
+  <div class="board-week-label">Week 3 Leaderboard — 5/26</div>
+  <div class="truck-row"><div class="truck-rank">1</div><div class="truck-name">Andrew Torres <span class="speed-year">'27</span></div><div class="truck-score">892</div></div>
+  <div class="truck-row"><div class="truck-rank">2</div><div class="truck-name">Benjamin Bierner <span class="speed-year">'30</span></div><div class="truck-score">876</div></div>
+  <div class="truck-row"><div class="truck-rank">3</div><div class="truck-name">Adrian Veleta <span class="speed-year">'29</span></div><div class="truck-score">870</div></div>
+  <div class="truck-row"><div class="truck-rank">4</div><div class="truck-name">Dominic Terrazas <span class="speed-year">'28</span></div><div class="truck-score">808</div></div>
+  <div class="truck-row"><div class="truck-rank">5</div><div class="truck-name">Zaiden Baker <span class="speed-year">'28</span></div><div class="truck-score">779</div></div>
+  <div class="truck-row"><div class="truck-rank">6</div><div class="truck-name">Evan Byers <span class="speed-year">'27</span></div><div class="truck-score">777</div></div>
+  <div class="truck-row"><div class="truck-rank">7</div><div class="truck-name">Christian Archuleta <span class="speed-year">'29</span></div><div class="truck-score">731</div></div>
+  <div class="truck-row"><div class="truck-rank">8</div><div class="truck-name">Isaiah Fuentes <span class="speed-year">'31</span></div><div class="truck-score">699</div></div>
+  <div class="truck-row"><div class="truck-rank">9</div><div class="truck-name">Bryce Baca <span class="speed-year">'31</span></div><div class="truck-score">662</div></div>
+  <div class="truck-row"><div class="truck-rank">10</div><div class="truck-name">Jason Crawford <span class="speed-year">'30</span></div><div class="truck-score">651</div></div>
+
+  <div class="board-divider"></div>
+
+  <div class="board-week-label">Week 4 Leaderboard — 6/1</div>
+  <div class="truck-row"><div class="truck-rank">1</div><div class="truck-name">Benjamin Bierner <span class="speed-year">'30</span></div><div class="truck-score">880</div></div>
+  <div class="truck-row"><div class="truck-rank">2</div><div class="truck-name">Andrew Torres <span class="speed-year">'27</span></div><div class="truck-score">855</div></div>
+  <div class="truck-row"><div class="truck-rank">3</div><div class="truck-name">Dominic Terrazas <span class="speed-year">'28</span></div><div class="truck-score">801</div></div>
+  <div class="truck-row"><div class="truck-rank">4</div><div class="truck-name">Adrian Veleta <span class="speed-year">'29</span></div><div class="truck-score">788</div></div>
+  <div class="truck-row"><div class="truck-rank">5</div><div class="truck-name">Zaiden Baker <span class="speed-year">'28</span></div><div class="truck-score">758</div></div>
+  <div class="truck-row"><div class="truck-rank">6</div><div class="truck-name">Isaiah Fuentes <span class="speed-year">'31</span></div><div class="truck-score">677</div></div>
+  <div class="truck-row"><div class="truck-rank">7</div><div class="truck-name">Cole Montoya <span class="speed-year">'28</span></div><div class="truck-score">654</div></div>
+  <div class="truck-row"><div class="truck-rank">8</div><div class="truck-name">Bryce Baca <span class="speed-year">'31</span></div><div class="truck-score">636</div></div>
+  <div class="truck-row"><div class="truck-rank">9</div><div class="truck-name">James Oros <span class="speed-year">'28</span></div><div class="truck-score">614</div></div>
+  <div class="truck-row"><div class="truck-rank">10</div><div class="truck-name">Cole Short <span class="speed-year">'30</span></div><div class="truck-score">610</div></div>
+</div>
+
+<!-- LEADERSHIP COUNCIL -->
+<div class="section">
+  <div class="section-title-bar">
+    <div class="title-accent"></div>
+    <div>
+      <div class="section-label">Program Leadership</div>
+      <div class="section-title">Leadership Council</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>The Leadership Council has been established. These five players were selected by the coaching staff to represent the program — on and off the field. They will help draft squads for the upcoming season and set the standard for what it means to be a Tiger.</p>
+  </div>
+  <div class="leadership-list">
+    <div class="leader-row">
+      <div class="leader-num">1</div>
+      <div class="leader-name">Evan Aguirre</div>
+      <div class="leader-year">Class of 2027</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">2</div>
+      <div class="leader-name">Billy Baca</div>
+      <div class="leader-year">Class of 2027</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">3</div>
+      <div class="leader-name">Andrew Torres</div>
+      <div class="leader-year">Class of 2027</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">4</div>
+      <div class="leader-name">Zaiden Baker</div>
+      <div class="leader-year">Class of 2028</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">5</div>
+      <div class="leader-name">Dominic Terrazas</div>
+      <div class="leader-year">Class of 2028</div>
+    </div>
+  </div>
+</div>
+
+<!-- HELMET NOTE -->
+<div class="callout">
+  <div class="callout-text">Still need a helmet fitting? Don't wait.</div>
+  <div class="callout-detail">Contact Coach Howell directly to set up a time to get measured. We need to make sure we have enough helmets for every player before the season starts. Don't miss out.</div>
+</div>
+
+<!-- CALENDAR -->
+<div class="section">
+  <div class="section-title-bar">
+    <div class="title-accent" style="background:var(--red)"></div>
+    <div>
+      <div class="section-label">Upcoming</div>
+      <div class="section-title">Key Dates</div>
+    </div>
+  </div>
+  <ul class="calendar-list">
+    <li class="cal-item red">
+      <div class="cal-date">
+        <div class="cal-month">Jun</div>
+        <div class="cal-day">18</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">7-on-7 at Socorro</div>
+        <div class="cal-detail">7:00 PM</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">1</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Equipment Issue</div>
+        <div class="cal-detail">July 1–3 · By Appointment</div>
+      </div>
+    </li>
+    <li class="cal-item red">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">6</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Summer Camp Begins</div>
+        <div class="cal-detail">July 6–17 · Mon–Fri · 8:00 AM · High School Players Only</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">17</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Team Lock-In</div>
+        <div class="cal-detail">After Scrimmage · July 17</div>
+      </div>
+    </li>
+    <li class="cal-item red">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">20</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Tiger Tuff Football Camp</div>
+        <div class="cal-detail">July 20–22 · Times & Location TBA</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">3</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Fall Practice Begins</div>
+        <div class="cal-detail">The Sharpening</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">13</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Scrimmage</div>
+        <div class="cal-detail">August 13</div>
+      </div>
+    </li>
+    <li class="cal-item gold">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">21</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Season Opener — at Tularosa</div>
+        <div class="cal-detail">7:00 PM · Full schedule releasing soon</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-tags">#FeedTheCats<span>#FFPDF</span></div>
+  <div class="footer-school">Hot Springs Tigers Football</div>
+  <div class="footer-location">Truth or Consequences, New Mexico</div>
+  <div class="footer-tagline"><em>The Ambush is coming.</em></div>
+  <div class="footer-bottom">
+    The Ambush · Issue 02 · June 2026 · Published by Hot Springs Tigers Football
+  </div>
+</div>
+
+</body>
+</html>
