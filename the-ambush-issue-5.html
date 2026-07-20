@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ambush — Issue 5 | Hot Springs Tigers Football</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --royal: #1a3a8f;
+    --red: #c8102e;
+    --gold: #f0c040;
+    --white: #ffffff;
+    --off-white: #f5f4f0;
+    --dark: #0d0d0d;
+    --mid: #1c1c1c;
+    --slate: #2e2e2e;
+    --text: #1a1a1a;
+    --light-text: #444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    font-family: 'Barlow', sans-serif;
+    color: var(--text);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .header { background: var(--dark); padding: 0; overflow: hidden; }
+  .header-stripe { height: 6px; background: linear-gradient(90deg, var(--royal) 0%, var(--royal) 50%, var(--red) 50%, var(--red) 100%); }
+  .header-inner { padding: 36px 32px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .header-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .header-title { font-family: 'Bebas Neue', sans-serif; font-size: 72px; line-height: 0.9; color: var(--white); letter-spacing: 2px; margin-bottom: 8px; }
+  .header-title span { color: var(--red); }
+  .header-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 20px; }
+  .header-divider { width: 48px; height: 3px; background: var(--gold); margin: 0 auto 18px; }
+  .header-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #666; }
+
+  .coach-corner { background: var(--royal); padding: 36px 32px; position: relative; overflow: hidden; }
+  .coach-corner::before { content: '"'; font-family: 'Bebas Neue', sans-serif; font-size: 280px; color: rgba(255,255,255,0.04); position: absolute; top: -60px; right: -10px; line-height: 1; pointer-events: none; }
+  .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .coach-corner .section-label { color: rgba(255,255,255,0.5); }
+  .coach-quote { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.25; color: var(--white); margin-bottom: 20px; }
+  .coach-body { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.82); }
+  .coach-body p + p { margin-top: 14px; }
+  .coach-sig { margin-top: 24px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+
+  .section { background: var(--off-white); padding: 36px 32px; border-top: 1px solid #e0ddd8; }
+  .section.dark { background: var(--mid); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 1px; color: var(--royal); margin-bottom: 6px; line-height: 1; }
+  .section.dark .section-title { color: var(--white); }
+  .section-title-bar { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 22px; }
+  .title-accent { width: 4px; height: 34px; background: var(--red); flex-shrink: 0; margin-bottom: 2px; }
+  .body-text { font-size: 15px; line-height: 1.75; color: var(--light-text); }
+  .body-text p + p { margin-top: 14px; }
+  .section.dark .body-text { color: rgba(255,255,255,0.75); }
+
+  /* NUMBERS GRID */
+  .numbers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 24px; }
+  .number-card { background: var(--royal); padding: 22px 16px; text-align: center; }
+  .number-card:nth-child(2) { background: var(--red); }
+  .number-card:nth-child(3) { background: var(--slate); }
+  .num-big { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--white); line-height: 1; margin-bottom: 4px; }
+  .num-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+
+  /* PERFECT ATTENDANCE */
+  .attendance-list { margin-top: 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .attendance-card { background: var(--dark); padding: 14px 16px; }
+  .attendance-name { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); }
+  .attendance-year { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: #555; margin-top: 2px; }
+
+  /* SQUAD BOX */
+  .squad-box { background: var(--royal); padding: 28px 32px; }
+  .squad-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+  .squad-title { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--gold); letter-spacing: 1px; margin-bottom: 16px; line-height: 1.1; }
+  .squad-body { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.82); }
+
+  /* CALLOUT */
+  .callout { background: var(--red); padding: 24px 32px; }
+  .callout-text { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--white); line-height: 1.3; }
+  .callout-detail { margin-top: 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.65); letter-spacing: 1px; }
+
+  /* SPEED BOARD */
+  .speed-board { background: var(--dark); padding: 36px 32px; border-top: 1px solid #111; }
+  .speed-category { margin-bottom: 28px; }
+  .speed-category:last-child { margin-bottom: 0; }
+  .speed-cat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a; }
+  .speed-row { display: flex; align-items: center; padding: 9px 0; border-bottom: 1px solid #1c1c1c; }
+  .speed-rank { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #444; width: 32px; flex-shrink: 0; }
+  .speed-name { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); flex: 1; letter-spacing: 0.5px; }
+  .speed-year { font-size: 11px; color: #555; margin-left: 6px; font-weight: 400; }
+  .speed-time { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--gold); letter-spacing: 1px; }
+  .speed-unit { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: #555; margin-left: 4px; }
+  .speed-pr { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--gold); margin-left: 4px; font-weight: 700; }
+  .board-divider { height: 1px; background: #1e1e1e; margin: 28px 0; }
+  .board-week-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 18px; }
+
+  /* TRUCK STICK */
+  .truck-row { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #1c1c1c; }
+  .truck-rank { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #444; width: 32px; flex-shrink: 0; }
+  .truck-name { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); flex: 1; }
+  .truck-year { font-size: 11px; color: #555; margin-left: 6px; font-weight: 400; }
+  .truck-score { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--red); letter-spacing: 1px; }
+  .truck-pr { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--gold); margin-left: 4px; font-weight: 700; }
+
+  /* SCHEDULE TABLE */
+  .schedule-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  .schedule-table th { background: var(--royal); color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 10px 12px; text-align: left; }
+  .schedule-table td { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600; padding: 11px 12px; border-bottom: 1px solid #e5e2dc; color: var(--text); }
+  .schedule-table tr:last-child td { border-bottom: none; }
+  .schedule-table tr:nth-child(even) td { background: #eeede8; }
+  .tag-home { background: var(--royal); color: var(--white); font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 2px 7px; font-family: 'Barlow Condensed', sans-serif; }
+  .tag-away { background: var(--red); color: var(--white); font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 2px 7px; font-family: 'Barlow Condensed', sans-serif; }
+  .tag-district { background: var(--dark); color: var(--gold); font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 2px 7px; font-family: 'Barlow Condensed', sans-serif; margin-left: 4px; }
+  .tag-hc { background: var(--gold); color: var(--dark); font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 2px 7px; font-family: 'Barlow Condensed', sans-serif; margin-left: 4px; }
+
+  /* CALENDAR */
+  .calendar-list { list-style: none; }
+  .cal-item { display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid #e5e2dc; align-items: flex-start; }
+  .cal-item:last-child { border-bottom: none; }
+  .cal-date { background: var(--royal); color: var(--white); text-align: center; padding: 8px 10px; min-width: 52px; flex-shrink: 0; }
+  .cal-month { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; }
+  .cal-day { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; }
+  .cal-item.red .cal-date { background: var(--red); }
+  .cal-item.gold .cal-date { background: var(--dark); border: 1px solid var(--gold); }
+  .cal-item.gold .cal-day { color: var(--gold); }
+  .cal-title { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: 0.3px; }
+  .cal-detail { font-size: 13px; color: #888; margin-top: 2px; }
+
+  /* FOOTER */
+  .footer { background: var(--dark); padding: 32px; text-align: center; }
+  .footer-tags { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 2px; color: var(--royal); margin-bottom: 8px; }
+  .footer-tags span { color: var(--red); margin-left: 12px; }
+  .footer-school { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--white); letter-spacing: 2px; margin-bottom: 4px; }
+  .footer-location { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 20px; }
+  .footer-tagline em { color: var(--gold); font-style: normal; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px; }
+  .footer-bottom { margin-top: 24px; padding-top: 20px; border-top: 1px solid #1e1e1e; font-size: 11px; color: #333; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-eyebrow">Hot Springs Tigers Football</div>
+    <div class="header-title">The<span> Ambush</span></div>
+    <div class="header-sub">Official Program Newsletter</div>
+    <div class="header-divider"></div>
+    <div class="header-meta">Issue 05 &nbsp;·&nbsp; July 2026 &nbsp;·&nbsp; #FFPDF</div>
+  </div>
+</div>
+
+<!-- COACH'S CORNER -->
+<div class="coach-corner">
+  <div class="section-label">From the Head Coach</div>
+  <div class="coach-quote">Summer Camp is done. The work speaks for itself.</div>
+  <div class="coach-body">
+    <p>Tiger families — Summer Camp is in the books, and I couldn't be more proud of what this group did. Twenty-nine players showed up every day. Ten did not miss a single practice. Two players — Zaiden Baker and Benjamin Bierner — made all 35 voluntary workouts from May through July. Every. Single. One. That kind of commitment is rare, and it doesn't go unnoticed.</p>
+    <p>We finished camp the right way — with an all-night lock-in at the high school. These guys are building something together, and you can feel it.</p>
+    <p>Now we turn the page. The schedule is out. Fall Camp starts August 3. The Ambush is coming — and it starts in two weeks.</p>
+    <p><strong style="color:var(--gold);">IMPORTANT:</strong> Every player must have a physical for the 2026–2027 school year before they can practice. High school practice starts August 3. Middle school practice starts August 10. Get your physical done now.</p>
+  </div>
+  <div class="coach-sig">— Coach Howell &nbsp;|&nbsp; Hot Springs Tigers Football</div>
+</div>
+
+<!-- SUMMER CAMP NUMBERS -->
+<div class="section">
+  <div class="section-title-bar">
+    <div class="title-accent"></div>
+    <div>
+      <div class="section-label">Summer Camp Recap</div>
+      <div class="section-title">The Numbers Tell the Story</div>
+    </div>
+  </div>
+  <div class="numbers-grid">
+    <div class="number-card">
+      <div class="num-big">29</div>
+      <div class="num-label">Players at Camp</div>
+    </div>
+    <div class="number-card">
+      <div class="num-big">77%</div>
+      <div class="num-label">Attendance Rate</div>
+    </div>
+    <div class="number-card">
+      <div class="num-big">10</div>
+      <div class="num-label">Perfect Attendance</div>
+    </div>
+  </div>
+  <div class="numbers-grid" style="margin-bottom:0;">
+    <div class="number-card" style="background:var(--mid);">
+      <div class="num-big">2</div>
+      <div class="num-label">All 35 Workouts</div>
+    </div>
+    <div class="number-card" style="background:var(--slate);">
+      <div class="num-big">11</div>
+      <div class="num-label">Over 80% Attendance</div>
+    </div>
+    <div class="number-card" style="background:#222;">
+      <div class="num-big">40</div>
+      <div class="num-label">HS Players Participated</div>
+    </div>
+  </div>
+  <div class="body-text" style="margin-top:20px;">
+    <p>Out of 290 possible practice attendances across Summer Camp, the Tigers logged 223 — a 76.9% rate. Seventeen middle school players also participated in voluntary workouts this summer. This program had 57 total players invest time in themselves before Fall Camp even begins.</p>
+  </div>
+</div>
+
+<!-- IRON MEN -->
+<div style="background:var(--gold); padding:28px 32px;">
+  <div style="font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:800; letter-spacing:4px; text-transform:uppercase; color:var(--dark); margin-bottom:10px; opacity:0.6;">All 35 Voluntary Workouts — May through July</div>
+  <div style="font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--dark); letter-spacing:1px; margin-bottom:16px;">Perfect Summer — Zaiden Baker & Benjamin Bierner</div>
+  <div style="font-size:15px; line-height:1.7; color:#1a1a1a;">
+    <p>Out of every player in the program, two made all 35 voluntary workouts from the first day of the Foundation Teaching Block in May through the last day of Summer Camp in July. Zaiden Baker (Class of 2028) and Benjamin Bierner (Class of 2030). Not a single absence. That's what elite preparation looks like. The rest of the program knows who to follow.</p>
+  </div>
+</div>
+
+<!-- PERFECT ATTENDANCE SUMMER CAMP -->
+<div class="section dark">
+  <div class="section-title-bar">
+    <div class="title-accent" style="background:var(--gold)"></div>
+    <div>
+      <div class="section-label" style="color:#666;">Summer Camp — Zero Absences</div>
+      <div class="section-title">Perfect Attendance</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>These ten players did not miss a single Summer Camp practice. Two weeks, every session, no excuses.</p>
+  </div>
+  <div class="attendance-list">
+    <div class="attendance-card">
+      <div class="attendance-name">Evan Aguirre</div>
+      <div class="attendance-year">Class of 2027</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Robert Sanchez</div>
+      <div class="attendance-year">Class of 2027</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Andrew Torres</div>
+      <div class="attendance-year">Class of 2027</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Zaiden Baker</div>
+      <div class="attendance-year">Class of 2028</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Leiastat Lopez</div>
+      <div class="attendance-year">Class of 2028</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Dominic Terrazas</div>
+      <div class="attendance-year">Class of 2028</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Jaxon Crawford</div>
+      <div class="attendance-year">Class of 2029</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Benjamin Bierner</div>
+      <div class="attendance-year">Class of 2030</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Jason Crawford</div>
+      <div class="attendance-year">Class of 2030</div>
+    </div>
+    <div class="attendance-card">
+      <div class="attendance-name">Bryton Walker</div>
+      <div class="attendance-year">Class of 2030</div>
+    </div>
+  </div>
+</div>
+
+<!-- SQUAD OF THE SUMMER -->
+<div class="squad-box">
+  <div class="squad-label">All Summer Long</div>
+  <div class="squad-title">Andrew Torres's Squad —<br>Squad of the Summer</div>
+  <div class="squad-body">Week after week, all summer long, Andrew Torres's squad led the program in attendance and put the most players on the perfect attendance list. Every single week. That's not luck — that's leadership. The standard this squad set this summer is the standard every squad will be measured against going forward. Congratulations to Andrew Torres and his squad.</div>
+</div>
+
+<!-- PHYSICAL REMINDER -->
+<div class="callout">
+  <div class="callout-text">⚠️ Physical Required Before You Can Practice</div>
+  <div class="callout-detail">Every player must have a physical on file for the 2026–2027 school year before they step on the field. High school practice starts August 3. Middle school practice starts August 10. Do not wait — get your physical done now.</div>
+</div>
+
+<!-- TIGER TUFF CAMP -->
+<div class="section">
+  <div class="section-title-bar">
+    <div class="title-accent"></div>
+    <div>
+      <div class="section-label">This Weekend</div>
+      <div class="section-title">Tiger Tuff Football Camp</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>The Hot Springs Tigers are giving back to the community this weekend with the Tiger Tuff Football Camp — a free two-day camp for kids in grades K–8, coached by the 2026 Hot Springs Tiger Football team.</p>
+    <p>Walk-ups are welcome. A signed permission slip is required. Bring cleats or tennis shoes, a water bottle, sunscreen, and a hat.</p>
+  </div>
+  <div style="margin-top:20px;">
+    <div style="display:flex; align-items:center; gap:16px; padding:12px 0; border-bottom:1px solid #e5e2dc;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--royal); width:36px;">D1</div>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:700; color:var(--text); flex:1;">Monday, July 20 — Tiger Stadium</div>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:14px; color:#888;">6:00–8:30 PM</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:12px 0;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--royal); width:36px;">D2</div>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:700; color:var(--text); flex:1;">Tuesday, July 21 — Arrey Community Ballpark</div>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:14px; color:#888;">6:00–8:30 PM</div>
+    </div>
+  </div>
+  <div class="body-text" style="margin-top:16px;">
+    <p>Questions? Email Coach Howell at lhowell@torcschools.net</p>
+  </div>
+</div>
+
+<!-- TOP PERFORMERS -->
+<div class="speed-board">
+  <div class="section-label" style="color:#666; letter-spacing:3px; font-size:10px; font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; margin-bottom:18px;">Top Performers — Summer Camp</div>
+
+  <!-- WEEK 9 40s -->
+  <div class="board-week-label">Week 9 · 40-Yard Dash — 7/8 · 🏆 12 Players Set Personal Records</div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Small Skills</div>
+    <div class="speed-row"><div class="speed-rank">1</div><div class="speed-name">Zaiden Baker <span class="speed-year">'28</span></div><div class="speed-time">4.65<span class="speed-unit">sec</span></div></div>
+    <div class="speed-row"><div class="speed-rank">2</div><div class="speed-name">Lucius McMurray <span class="speed-year">'30</span></div><div class="speed-time">4.88<span class="speed-unit">sec</span></div></div>
+    <div class="speed-row"><div class="speed-rank">3</div><div class="speed-name">Billy Baca <span class="speed-year">'27</span></div><div class="speed-time">4.92<span class="speed-unit">sec</span></div></div>
+    <div class="speed-row"><div class="speed-rank">4</div><div class="speed-name">Cole Montoya <span class="speed-year">'28</span></div><div class="speed-time">4.95<span class="speed-unit">sec</span></div></div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Big Skills</div>
+    <div class="speed-row"><div class="speed-rank">1</div><div class="speed-name">Aaron Gill <span class="speed-year">'27</span></div><div class="speed-time">5.03<span class="speed-unit">sec</span></div></div>
+    <div class="speed-row"><div class="speed-rank">2</div><div class="speed-name">Breylin Rubio <span class="speed-year">'27</span></div><div class="speed-time">5.23<span class="speed-unit">sec</span></div></div>
+    <div class="speed-row"><div class="speed-rank">3</div><div class="speed-name">Curtis Trejo <span class="speed-year">'29</span></div><div class="speed-time">5.31<span class="speed-unit">sec</span></div></div>
+    <div class="speed-row"><div class="speed-rank">4</div><div class="speed-name">Christian Archuleta <span class="speed-year">'29</span></div><div class="speed-time">5.52<span class="speed-unit">sec</span></div></div>
+  </div>
+
+  <div class="board-divider"></div>
+
+  <!-- WEEK 10 SPEEDS -->
+  <div class="board-week-label">Week 10 · Top Speeds — 7/13 · 🏆 9 Players Set Personal Records</div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Small Skills</div>
+    <div class="speed-row"><div class="speed-rank">1</div><div class="speed-name">Zaiden Baker <span class="speed-year">'28</span></div><div class="speed-time">21.93<span class="speed-unit">mph</span></div></div>
+    <div class="speed-row"><div class="speed-rank">2</div><div class="speed-name">Robert Sanchez <span class="speed-year">'27</span></div><div class="speed-time">20.91<span class="speed-unit">mph</span><span class="speed-pr">PR</span></div></div>
+    <div class="speed-row"><div class="speed-rank">T-3</div><div class="speed-name">Evan Aguirre <span class="speed-year">'27</span></div><div class="speed-time">20.15<span class="speed-unit">mph</span><span class="speed-pr">PR</span></div></div>
+    <div class="speed-row"><div class="speed-rank">T-3</div><div class="speed-name">Ryan Stratton <span class="speed-year">'27</span></div><div class="speed-time">20.15<span class="speed-unit">mph</span><span class="speed-pr">PR</span></div></div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">Big Skills</div>
+    <div class="speed-row"><div class="speed-rank">1</div><div class="speed-name">Aaron Gill <span class="speed-year">'27</span></div><div class="speed-time">21.72<span class="speed-unit">mph</span><span class="speed-pr">PR</span></div></div>
+    <div class="speed-row"><div class="speed-rank">2</div><div class="speed-name">Curtis Trejo <span class="speed-year">'29</span></div><div class="speed-time">18.64<span class="speed-unit">mph</span></div></div>
+    <div class="speed-row"><div class="speed-rank">3</div><div class="speed-name">Evan Byers <span class="speed-year">'27</span></div><div class="speed-time">17.90<span class="speed-unit">mph</span></div></div>
+    <div class="speed-row"><div class="speed-rank">4</div><div class="speed-name">Jaxon Crawford <span class="speed-year">'29</span></div><div class="speed-time">17.21<span class="speed-unit">mph</span></div></div>
+  </div>
+  <div class="speed-category">
+    <div class="speed-cat-label">TCMS Tiger Cubs</div>
+    <div class="speed-row"><div class="speed-rank">1</div><div class="speed-name">Isaiah Fuentes <span class="speed-year">'31</span></div><div class="speed-time">16.45<span class="speed-unit">mph</span><span class="speed-pr">PR</span></div></div>
+  </div>
+</div>
+
+<!-- TRUCK STICK -->
+<div class="speed-board" style="border-top:1px solid #222;">
+  <div class="section-label" style="color:#666; letter-spacing:3px; font-size:10px; font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; margin-bottom:6px;">Arena OVR</div>
+  <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--white); letter-spacing:1px; margin-bottom:6px;">Truck Stick Leaderboard</div>
+  <div style="font-family:'Barlow Condensed',sans-serif; font-size:13px; color:#555; line-height:1.5; margin-bottom:6px;">Combines speed and body weight to measure how much force a player brings when they hit.</div>
+  <div style="font-family:'Barlow Condensed',sans-serif; font-size:12px; color:var(--gold); margin-bottom:24px;">* denotes Personal Record (PR)</div>
+
+  <div class="board-week-label">Week 10 Leaderboard — 7/13</div>
+  <div class="truck-row"><div class="truck-rank">1</div><div class="truck-name">Andrew Torres <span class="speed-year">'27</span></div><div class="truck-score">946<span class="truck-pr">PR</span></div></div>
+  <div class="truck-row"><div class="truck-rank">2</div><div class="truck-name">Benjamin Bierner <span class="speed-year">'30</span></div><div class="truck-score">895</div></div>
+  <div class="truck-row"><div class="truck-rank">3</div><div class="truck-name">Dominic Terrazas <span class="speed-year">'28</span></div><div class="truck-score">846<span class="truck-pr">PR</span></div></div>
+  <div class="truck-row"><div class="truck-rank">4</div><div class="truck-name">Adrian Veleta <span class="speed-year">'29</span></div><div class="truck-score">845</div></div>
+  <div class="truck-row"><div class="truck-rank">5</div><div class="truck-name">Aaron Gill <span class="speed-year">'27</span></div><div class="truck-score">810.2<span class="truck-pr">PR</span></div></div>
+  <div class="truck-row"><div class="truck-rank">6</div><div class="truck-name">Evan Byers <span class="speed-year">'27</span></div><div class="truck-score">809.8</div></div>
+  <div class="truck-row"><div class="truck-rank">7</div><div class="truck-name">Ryan Stratton <span class="speed-year">'27</span></div><div class="truck-score">795<span class="truck-pr">PR</span></div></div>
+  <div class="truck-row"><div class="truck-rank">8</div><div class="truck-name">Zaiden Baker <span class="speed-year">'28</span></div><div class="truck-score">794</div></div>
+  <div class="truck-row"><div class="truck-rank">9</div><div class="truck-name">Isaiah Fuentes <span class="speed-year">'31</span></div><div class="truck-score">754<span class="truck-pr">PR</span></div></div>
+  <div class="truck-row"><div class="truck-rank">10</div><div class="truck-name">Evan Aguirre <span class="speed-year">'27</span></div><div class="truck-score">663<span class="truck-pr">PR</span></div></div>
+</div>
+
+<!-- 2026 SCHEDULE -->
+<div class="section">
+  <div class="section-title-bar">
+    <div class="title-accent" style="background:var(--red)"></div>
+    <div>
+      <div class="section-label">It's Here</div>
+      <div class="section-title">2026 Football Schedule</div>
+    </div>
+  </div>
+  <div class="body-text">
+    <p>The schedule is out. Mark your calendars — all games are 7:00 PM. Dates and times are subject to change due to official shortages. Games could move from Friday night to Thursday or Saturday. We'll keep you updated as soon as we know.</p>
+  </div>
+  <table class="schedule-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Opponent</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aug 13</td>
+        <td>3-Way Scrimmage vs Cobre & Cuba</td>
+        <td><span class="tag-home">HOME</span></td>
+      </tr>
+      <tr>
+        <td>Aug 21</td>
+        <td>Tularosa Wildcats</td>
+        <td><span class="tag-away">AWAY</span></td>
+      </tr>
+      <tr>
+        <td>Sep 4</td>
+        <td>Deming Wildcats</td>
+        <td><span class="tag-home">HOME</span></td>
+      </tr>
+      <tr>
+        <td>Sep 11</td>
+        <td>Socorro Warriors</td>
+        <td><span class="tag-away">AWAY</span><span class="tag-district">DISTRICT</span></td>
+      </tr>
+      <tr>
+        <td>Sep 18</td>
+        <td>Moriarty Pintos</td>
+        <td><span class="tag-home">HOME</span><span class="tag-district">DISTRICT</span></td>
+      </tr>
+      <tr>
+        <td>Sep 25</td>
+        <td>McCurdy Bobcats</td>
+        <td><span class="tag-home">HOME</span><span class="tag-hc">HOMECOMING</span></td>
+      </tr>
+      <tr>
+        <td>Oct 2</td>
+        <td>Silver Colts</td>
+        <td><span class="tag-away">AWAY</span><span class="tag-district">DISTRICT</span></td>
+      </tr>
+      <tr>
+        <td>Oct 9</td>
+        <td>Hatch Valley Bears</td>
+        <td><span class="tag-home">HOME</span><span class="tag-district">DISTRICT</span></td>
+      </tr>
+      <tr>
+        <td>Oct 16</td>
+        <td>NMMI Colts</td>
+        <td><span class="tag-away">AWAY</span><span class="tag-district">DISTRICT</span></td>
+      </tr>
+      <tr>
+        <td>Oct 23</td>
+        <td>Hope Christian Huskies</td>
+        <td><span class="tag-home">HOME</span><span class="tag-district">DISTRICT</span></td>
+      </tr>
+      <tr>
+        <td>Oct 30</td>
+        <td>Ruidoso Warriors</td>
+        <td><span class="tag-away">AWAY</span><span class="tag-district">DISTRICT</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:12px; font-family:'Barlow Condensed',sans-serif; font-size:12px; color:#999; font-style:italic;">Dates & times subject to change due to official shortage. Games may move to Thursday or Saturday.</div>
+</div>
+
+<!-- CALENDAR -->
+<div class="section" style="border-top:1px solid #e0ddd8;">
+  <div class="section-title-bar">
+    <div class="title-accent" style="background:var(--red)"></div>
+    <div>
+      <div class="section-label">Upcoming</div>
+      <div class="section-title">Key Dates</div>
+    </div>
+  </div>
+  <ul class="calendar-list">
+    <li class="cal-item red">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">20</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Tiger Tuff Football Camp — Day 1</div>
+        <div class="cal-detail">Tiger Stadium · 6:00–8:30 PM · Grades K–8 · Free</div>
+      </div>
+    </li>
+    <li class="cal-item red">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">21</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Tiger Tuff Football Camp — Day 2</div>
+        <div class="cal-detail">Arrey Community Ballpark · 6:00–8:30 PM · Grades K–8 · Free</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Jul</div>
+        <div class="cal-day">27</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">New Streak Begins</div>
+        <div class="cal-detail">Voluntary workouts resume</div>
+      </div>
+    </li>
+    <li class="cal-item red">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">3</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Fall Camp Begins — High School</div>
+        <div class="cal-detail">Physical required before first practice</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">10</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Middle School Practice Begins</div>
+        <div class="cal-detail">Physical required before first practice</div>
+      </div>
+    </li>
+    <li class="cal-item">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">13</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">3-Way Scrimmage vs Cobre & Cuba</div>
+        <div class="cal-detail">Home · 7:00 PM</div>
+      </div>
+    </li>
+    <li class="cal-item gold">
+      <div class="cal-date">
+        <div class="cal-month">Aug</div>
+        <div class="cal-day">21</div>
+      </div>
+      <div class="cal-info">
+        <div class="cal-title">Season Opener — at Tularosa</div>
+        <div class="cal-detail">7:00 PM · Away</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-tags">#FeedTheCats<span>#FFPDF</span></div>
+  <div class="footer-school">Hot Springs Tigers Football</div>
+  <div class="footer-location">Truth or Consequences, New Mexico</div>
+  <div class="footer-tagline"><em>The Ambush is coming.</em></div>
+  <div class="footer-bottom">The Ambush · Issue 05 · July 2026 · Published by Hot Springs Tigers Football</div>
+</div>
+
+</body>
+</html>
